@@ -18,6 +18,8 @@ As well as useful links to learn more */
 ====== Design Palette ====== */
 :root {
   --paper: oklch(7 0 0);
+  --button: oklch(47.541% 0.18758 260.174);
+  --button-focus: oklch(58.554% 0.21124 260.018);
   --ink: color-mix(in oklab, var(--color) 5%, black);
   --font: 100%/1.5 system-ui;
   --space: clamp(6px, 6px + 2vw, 15px);
@@ -45,19 +47,31 @@ svg {
   object-fit: cover;
 }
 
+a:link,
+a:focus,
+a:active,
+a:visited {
+  color: white;
+  text-decoration: none;
+  ;
+}
+
 /* ====== Site Layout ====== 
 Setting the overall rules for page regions
 https://www.w3.org/WAI/tutorials/page-structure/regions/
 */
-main {
+.main-content {
   max-width: var(--container);
-  margin: 0 auto calc(var(--space) * 4) auto;
+  margin: 0 auto;
 }
 
 .footer {
-  position: fixed;
-  bottom: 0;
+  margin-top: 1.5rem;
+  padding: 1rem 0;
+  width: 100%;
+  background-color: var(--button);
   text-align: center;
+  color: white;
 }
 
 /* ====== Articles Grid Layout ====
@@ -90,11 +104,26 @@ article {
   grid-template-columns: var(--space) 1fr var(--space);
 
   >* {
+    grid-column: 1/4;
+  }
+  > summary,
+  > footer {
     grid-column: 2/3;
   }
 
-  >img {
+  > header > figure {
     grid-column: span 3;
+    width: 100%;
+    aspect-ratio:3/1;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    /* &.hero{
+      height: 30rem;
+    } */
+  }
+  > header > h2{
+    padding: 0 var(--space);
   }
 }
 
@@ -115,19 +144,30 @@ html * {
   grid-auto-rows: auto;
   gap: 1.5rem;
 }
-article:first-child{
-   grid-column: span 2;
+
+article:first-child {
+  grid-column: span 2;
 }
 
 .more {
   display: inline-block;
-  padding: 0.5rem 0;
-  min-width: 2rem
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  min-width: 2rem;
+  background-color: var(--button);
+  transition: background-color 0.3s ease-out;
+  border: none;
 }
+
+.more:hover,
+.more:focus {
+  background-color: var(--button-focus);
+}
+
 /* sticky footer */
-.main-content{
+.main-content {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-justify-content: space-between;
+  justify-content: space-between;
 }
