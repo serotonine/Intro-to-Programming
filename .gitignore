@@ -14,3 +14,7 @@ dist
 *~
 *.bak
 *.tmp
+# Config files.
+package-lock.json
+# Just not pushable at all.
+2-Structuring and testing data/*
